@@ -25,7 +25,8 @@ skipTopicsUpdate: true
 skipHomepageUpdate: true
 
 status-website:
-  cname: status.predivo.ch
+  # TEMPORARY until the DNS record status -> predivo-gmbh.github.io exists; then: cname: status.predivo.ch, no baseUrl
+  baseUrl: /status-predivo
   name: Predivo Status
   logoUrl: https://predivo.ch/favicon.svg
   favicon: https://predivo.ch/favicon-32x32.png
