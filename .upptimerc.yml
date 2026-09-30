@@ -1,31 +1,103 @@
-# Change these first
-owner: upptime # Your GitHub organization or username, where this repository lives
-repo: upptime # The name of this repository
+# Status page for predivo.ch — https://status.predivo.ch
+# Plan: C:\Business\Docs\PLAN-status-pages-2026-09-30.md (Predivo GmbH, 2026-09-30)
+owner: Predivo-GmbH
+repo: status-predivo
+user-agent: Predivo-GmbH
 
 sites:
-  - name: Google
-    url: https://www.google.com
-  - name: Wikipedia
-    url: https://en.wikipedia.org
-  - name: Hacker News
-    url: https://news.ycombinator.com
-  - name: Secret Site
-    url: $SECRET_SITE
+  - name: Website (Deutsch)
+    url: https://predivo.ch/de
+    slug: website-de
+    icon: https://predivo.ch/favicon-32x32.png
+    maxResponseTime: 10000
+    # a 200 from a host error or parking page is not our site
+    __dangerous__body_down_if_text_missing: "Predivo"
+  - name: Website (English)
+    url: https://predivo.ch/en
+    slug: website-en
+    icon: https://predivo.ch/favicon-32x32.png
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "Predivo"
+
+# the repo-scoped workflow token cannot edit repository metadata; description + homepage were set once through the API
+skipDescriptionUpdate: true
+skipTopicsUpdate: true
+skipHomepageUpdate: true
 
 status-website:
-  # Add your custom domain name, or remove the `cname` line if you don't have a domain
-  # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
-  cname: demo.upptime.js.org
-  # baseUrl: /your-repo-name
-  logoUrl: https://raw.githubusercontent.com/upptime/upptime.js.org/master/static/img/icon.svg
-  name: Upptime
-  introTitle: "**Upptime** is the open-source uptime monitor and status page, powered entirely by GitHub."
-  introMessage: This is a sample status page which uses **real-time** data from our [GitHub repository](https://github.com/upptime/upptime). No server required — just GitHub Actions, Issues, and Pages. [**Get your own for free**](https://github.com/upptime/upptime)
+  cname: status.predivo.ch
+  name: Predivo Status
+  logoUrl: https://predivo.ch/favicon.svg
+  favicon: https://predivo.ch/favicon-32x32.png
+  faviconSvg: https://predivo.ch/favicon.svg
+  theme: light
+  introTitle: "**Status der Predivo-Dienste**"
+  introMessage: "Hier sehen Sie live, ob predivo.ch erreichbar ist. Geprüft wird etwa alle fünf Minuten, von ausserhalb unserer eigenen Server. Störungen und geplante Wartungen erscheinen hier automatisch."
   navbar:
     - title: Status
       href: /
-    - title: GitHub
-      href: https://github.com/$OWNER/$REPO
+    - title: predivo.ch
+      href: https://predivo.ch
 
-# Upptime also supports notifications, assigning issues, and more
-# See https://upptime.js.org/docs/configuration
+i18n:
+  activeIncidents: Aktuelle Störungen
+  allSystemsOperational: Alle Systeme laufen normal
+  incidentReport: "Bericht zu Störung #$NUMBER →"
+  activeIncidentSummary: Eröffnet am $DATE, $POSTS Meldungen
+  incidentTitle: Störung $NUMBER im Detail
+  incidentDetails: Details zur Störung
+  incidentFixed: Behoben
+  incidentOngoing: Andauernd
+  incidentOpenedAt: Eröffnet am
+  incidentClosedAt: Geschlossen am
+  incidentViewOnGitHub: Auf GitHub ansehen und abonnieren
+  incidentCommentSummary: Veröffentlicht am $DATE von $AUTHOR
+  incidentBack: ← Zurück zu allen Störungen
+  pastIncidents: Frühere Störungen
+  pastIncidentsResolved: Behoben in $MINUTES Minuten, $POSTS Meldungen
+  liveStatus: Live-Status
+  overallUptime: "Verfügbarkeit gesamt: $UPTIME"
+  overallUptimeTitle: Verfügbarkeit gesamt
+  averageResponseTime: "Mittlere Antwortzeit: $TIMEms"
+  averageResponseTimeTitle: Mittlere Antwortzeit
+  sevelDayResponseTime: Antwortzeit der letzten 7 Tage
+  responseTimeMs: Antwortzeit (ms)
+  up: In Betrieb
+  down: Ausgefallen
+  degraded: Eingeschränkt
+  ms: ms
+  loading: Wird geladen
+  navGitHub: GitHub
+  footer: "Diese Seite ist [Open Source]($REPO) und läuft mit [Upptime](https://upptime.js.org). © Predivo GmbH"
+  rateLimitExceededTitle: Zu viele Anfragen
+  rateLimitExceededIntro: Sie haben die Zahl der Anfragen pro Stunde erreicht. Bitte warten Sie etwas, bevor Sie die Seite erneut laden. Alternativ können Sie ein persönliches GitHub-Zugangstoken hinterlegen.
+  rateLimitExceededWhatDoesErrorMean: Was bedeutet dieser Fehler?
+  rateLimitExceededErrorMeaning: Diese Seite liest den Live-Status über die GitHub-API. GitHub erlaubt pro IP-Adresse 60 Anfragen pro Stunde, und diese sind aufgebraucht.
+  rateLimitExceededErrorHowCanFix: Wie lässt sich das beheben?
+  rateLimitExceededErrorFix: Nach einer Stunde ist das Limit Ihrer IP-Adresse wieder frei. Alternativ erhalten Sie mit einem persönlichen GitHub-Zugangstoken 5000 weitere Anfragen pro Stunde.
+  rateLimitExceededGeneratePAT: So erstellen Sie ein persönliches Zugangstoken
+  rateLimitExceededHasSet: Ein persönliches Zugangstoken ist hinterlegt.
+  rateLimitExceededRemoveToken: Token entfernen
+  rateLimitExceededGitHubPAT: Persönliches GitHub-Zugangstoken
+  rateLimitExceededCopyPastePAT: Token hier einfügen
+  rateLimitExceededSaveToken: Token speichern
+  errorTitle: Ein Fehler ist aufgetreten
+  errorIntro: Beim Abrufen des aktuellen Status ist ein Fehler aufgetreten.
+  errorText: Bitte versuchen Sie es in einigen Augenblicken erneut.
+  errorHome: Zur Startseite
+  pastScheduledMaintenance: Frühere geplante Wartungen
+  scheduledMaintenance: Geplante Wartung
+  scheduledMaintenanceSummaryStarted: Begonnen am $DATE für $DURATION Minuten
+  scheduledMaintenanceSummaryStarts: Beginnt am $DATE für $DURATION Minuten
+  startedAt: Begonnen am
+  startsAt: Beginnt am
+  duration: Dauer
+  durationMin: $DURATION Minuten
+  incidentCompleted: Abgeschlossen
+  incidentScheduled: Geplant
+  duration24H: 24 Std.
+  duration7D: 7 Tage
+  duration30D: 30 Tage
+  duration1Y: 1 Jahr
+  durationAll: alles
+  locale: de-CH
