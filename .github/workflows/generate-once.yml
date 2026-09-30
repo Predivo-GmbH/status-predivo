@@ -1,0 +1,28 @@
+# One-off, deleted after use: runs Upptime's workflow generator and uploads the result as an
+# artifact instead of pushing it (the repo-scoped token may not write workflow files).
+name: Generate workflows once
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run update-template (its push is expected to fail)
+        continue-on-error: true
+        uses: upptime/uptime-monitor@v1.44.1
+        with:
+          command: "update-template"
+        env:
+          GH_PAT: ${{ github.token }}
+      - name: Collect generated files
+        run: |
+          mkdir -p out
+          cp -r .github/workflows out/
+          git status --short > out/status.txt
+          git log --oneline -3 > out/log.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: generated
+          path: out/
