@@ -27,6 +27,8 @@ skipHomepageUpdate: true
 status-website:
   # DNS: CNAME status.predivo.ch -> predivo-gmbh.github.io. (Plesk zone predivo.ch, added 2026-09-30)
   cname: status.predivo.ch
+  # The public status page is Atlassian Statuspage (free plan, no custom domain): this address forwards there.
+  customHeadHtml: '<meta http-equiv="refresh" content="0; url=https://predivo.statuspage.io"><link rel="canonical" href="https://predivo.statuspage.io">'
   name: Predivo Status
   logoUrl: https://predivo.ch/favicon.svg
   favicon: https://predivo.ch/favicon-32x32.png
@@ -39,6 +41,8 @@ status-website:
       href: /
     - title: predivo.ch
       href: https://predivo.ch
+    - title: Statusseite
+      href: https://predivo.statuspage.io
 
 i18n:
   activeIncidents: Aktuelle Störungen
