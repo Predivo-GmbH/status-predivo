@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Website (Deutsch)",
+    "url": "https://predivo.ch/de",
+    "icon": "https://predivo.ch/favicon-32x32.png",
+    "slug": "website-de",
+    "status": "up",
+    "uptime": "100.00%",
+    "uptimeDay": "100.00%",
+    "uptimeWeek": "100.00%",
+    "uptimeMonth": "100.00%",
+    "uptimeYear": "100.00%",
+    "time": 984,
+    "timeDay": 984,
+    "timeWeek": 984,
+    "timeMonth": 984,
+    "timeYear": 984,
+    "dailyMinutesDown": {}
+  },
+  {
+    "name": "Website (English)",
+    "url": "https://predivo.ch/en",
+    "icon": "https://predivo.ch/favicon-32x32.png",
+    "slug": "website-en",
+    "status": "up",
+    "uptime": "100.00%",
+    "uptimeDay": "100.00%",
+    "uptimeWeek": "100.00%",
+    "uptimeMonth": "100.00%",
+    "uptimeYear": "100.00%",
+    "time": 696,
+    "timeDay": 696,
+    "timeWeek": 696,
+    "timeMonth": 696,
+    "timeYear": 696,
+    "dailyMinutesDown": {}
+  }
+]
