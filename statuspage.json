@@ -3,6 +3,9 @@
   "public_url": "https://predivo.statuspage.io",
   "components": {
     "website": "l1hbmt8jhkwv",
-    "client-portal": "fg72ngq4b2yq"
+    "client-portal": "fg72ngq4b2yq",
+    "contact-form": "fb9kqyldfbkr",
+    "client-portal-signin": "05xczjgp30mq",
+    "email": "scnqqspwtq5x"
   }
 }

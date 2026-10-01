@@ -54,6 +54,9 @@ export const compose = ({ de, en }) => `${de.trim()}\n\n${en.trim()}`
 export const SERVICES = {
   website: { de: 'Die Website', deAcc: 'die Website', deShort: 'Website', en: 'the website', enShort: 'Website' },
   'client-portal': { de: 'Das Kundenportal', deAcc: 'das Kundenportal', deShort: 'Kundenportal', en: 'the client portal', enShort: 'Client portal' },
+  'contact-form': { de: 'Das Kontaktformular', deAcc: 'das Kontaktformular', deShort: 'Kontaktformular', en: 'the contact form', enShort: 'Contact form' },
+  'client-portal-signin': { de: 'Die Anmeldung zum Kundenportal', deAcc: 'die Anmeldung zum Kundenportal', deShort: 'Anmeldung Kundenportal', en: 'the client portal sign-in', enShort: 'Client portal sign-in' },
+  email: { de: 'Unser E-Mail-Server', deAcc: 'unseren E-Mail-Server', deShort: 'E-Mail', en: 'our email server', enShort: 'Email' },
 }
 const svc = (slug) => SERVICES[slug] || { de: `Der Dienst ${slug}`, deAcc: `den Dienst ${slug}`, deShort: slug, en: `the ${slug} service`, enShort: slug }
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)

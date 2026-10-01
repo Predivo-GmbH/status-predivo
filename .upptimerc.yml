@@ -20,6 +20,32 @@ sites:
     maxResponseTime: 10000
     __dangerous__body_down_if_text_missing: "Project Portal"
 
+  # Roger 2026-10-01 ("All three"): what clients rely on that the two page checks cannot see.
+  # The contact form is asked with a plain GET: its script answers 405 "Method not allowed" - proof
+  # that it runs, without sending a message (the mail itself is the Email check below).
+  - name: Contact form
+    url: https://predivo.ch/api/contact.php
+    slug: contact-form
+    expectedStatusCodes:
+      - 405
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "Method not allowed"
+  # The portal page can load while nobody can sign in: ask its sign-in service with the portal's
+  # PUBLIC key (what every visitor's browser receives), kept as a repo secret.
+  - name: Client portal sign-in
+    url: https://xoecpzfsskalvjrtcbbl.supabase.co/auth/v1/health
+    slug: client-portal-signin
+    headers:
+      - "apikey: $PORTAL_SUPABASE_ANON"
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "GoTrue"
+  # The mail server for hello@predivo.ch. Port 465 (secure mail): port 25 is blocked for outgoing
+  # connections on most networks, GitHub's runners included.
+  - name: Email
+    url: mail.predivo.ch
+    slug: email
+    check: tcp-ping
+    port: 465
 
 # the repo-scoped workflow token cannot edit repository metadata; description + homepage were set once through the API
 skipDescriptionUpdate: true
