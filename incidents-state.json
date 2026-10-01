@@ -1,14 +1,14 @@
 {
   "website": {
     "down": 0,
-    "up": 14,
+    "up": 15,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "client-portal": {
     "down": 0,
-    "up": 14,
+    "up": 15,
     "component": "operational",
     "incident": null,
     "lastResolved": null
