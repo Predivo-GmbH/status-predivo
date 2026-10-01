@@ -13,58 +13,13 @@
 //   node scripts/incident-sync.mjs --dry-run  decide and print, write nothing
 //   node scripts/incident-sync.mjs --drill    the end-to-end proof: a clearly labelled test incident is opened,
 //                                             moved through monitoring and resolved, with emails OFF, then deleted
-import fs from 'fs'
 import { decide } from './lib/decide.mjs'
 import { guard, compose, TEMPLATES } from './lib/guard.mjs'
+import { cfg, sp, loadState, saveState, verdicts as readVerdicts } from './lib/io.mjs'
 
 const DRY = process.argv.includes('--dry-run')
 const DRILL = process.argv.includes('--drill')
-const cfg = JSON.parse(fs.readFileSync('statuspage.json', 'utf8'))
-const KEY = process.env.STATUSPAGE_API_KEY
-if (!KEY && !DRY) { console.error('STATUSPAGE_API_KEY is not set'); process.exit(1) }
-
-const sp = async (method, path, body) => {
-  const r = await fetch(`https://api.statuspage.io/v1/pages/${cfg.page_id}${path}`, {
-    method, headers: { Authorization: `OAuth ${KEY}`, 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined,
-  })
-  await new Promise((res) => setTimeout(res, 1100)) // Statuspage allows about one request per second
-  if (!r.ok) throw new Error(`Statuspage ${method} ${path} -> HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`)
-  return r.status === 204 ? null : r.json()
-}
-
-// ---- state on the incident-state branch -------------------------------------------------------------
-const REPO = process.env.GITHUB_REPOSITORY || 'Predivo-GmbH/status-predivo'
-const BRANCH = 'incident-state'
-const FILE = 'incidents-state.json'
-const gh = async (method, path, body) => {
-  const r = await fetch(`https://api.github.com/repos/${REPO}${path}`, {
-    method, headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
-    body: body ? JSON.stringify(body) : undefined,
-  })
-  return { status: r.status, j: r.status === 204 ? null : await r.json().catch(() => null) }
-}
-async function loadState() {
-  if (DRY && !process.env.GITHUB_TOKEN) return { state: {}, sha: null }
-  let r = await gh('GET', `/contents/${FILE}?ref=${BRANCH}`)
-  if (r.status === 404) {
-    const branch = await gh('GET', `/branches/${BRANCH}`)
-    if (branch.status === 404) {
-      const head = await gh('GET', '/git/ref/heads/master')
-      const made = await gh('POST', '/git/refs', { ref: `refs/heads/${BRANCH}`, sha: head.j.object.sha })
-      if (made.status !== 201) throw new Error(`could not create branch ${BRANCH}: HTTP ${made.status}`)
-    }
-    return { state: {}, sha: null }
-  }
-  if (r.status !== 200) throw new Error(`could not read ${FILE}: HTTP ${r.status}`)
-  return { state: JSON.parse(Buffer.from(r.j.content, 'base64').toString('utf8')), sha: r.j.sha }
-}
-async function saveState(state, sha) {
-  const body = { message: `incident state ${new Date().toISOString()}`, branch: BRANCH, content: Buffer.from(JSON.stringify(state, null, 2) + '\n').toString('base64') }
-  if (sha) body.sha = sha
-  const r = await gh('PUT', `/contents/${FILE}`, body)
-  // 409/422 = another run wrote first; failing loudly is right - the next run starts from its state
-  if (r.status !== 200 && r.status !== 201) throw new Error(`could not save ${FILE}: HTTP ${r.status} ${JSON.stringify(r.j).slice(0, 160)}`)
-}
+if (!process.env.STATUSPAGE_API_KEY && !DRY) { console.error('STATUSPAGE_API_KEY is not set'); process.exit(1) }
 
 // ---- carrying out one action ---------------------------------------------------------------------------
 function textFor(a) {
@@ -130,9 +85,8 @@ async function drill() {
 
 // ---- the normal run ---------------------------------------------------------------------------------------
 async function run() {
-  const summary = JSON.parse(fs.readFileSync('history/summary.json', 'utf8'))
-  const verdicts = Object.fromEntries(summary.filter((s) => cfg.components[s.slug]).map((s) => [s.slug, s.status]))
-  const { state, sha } = await loadState()
+  const verdicts = readVerdicts()
+  const { state, sha } = DRY ? { state: {}, sha: null } : await loadState()
 
   // reconcile with what a person (or the AI, layer C) did on Statuspage since the last run
   for (const [slug, s] of Object.entries(state)) {

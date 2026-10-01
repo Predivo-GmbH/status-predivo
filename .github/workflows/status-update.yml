@@ -1,0 +1,67 @@
+# THE ONE DOOR for updates that are not layer A's fixed rules (Playbook
+# docs/PLAN-self-healing-status-page-2026-10-01.md, layers B and C): a repair note ("healing"), the AI's
+# explanation while an incident is open ("identified", "update", "monitoring") and its look back
+# afterwards ("review"). Every text passes scripts/lib/guard.mjs or is NOT posted and this run fails.
+# No email is ever sent from here (subscribers hear about open and close only - Roger, 2026-10-01).
+#
+# The board worker posts with:
+#   gh workflow run "Status update" -R Predivo-GmbH/status-predivo -f slug=website -f stage=identified -f de="..." -f en="..."
+# A repair (production-monitor) posts with repository_dispatch, event "status-update",
+#   client_payload {slug, stage: "healing"}.
+# Texts reach the script as environment variables only - never pasted into a shell line.
+name: Status update
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Service"
+        type: choice
+        options: [website, client-portal]
+        default: website
+      stage:
+        description: "healing | identified | update | monitoring | review"
+        type: choice
+        options: [identified, update, monitoring, review, healing]
+        default: identified
+      de:
+        description: "German text (customer words, <= 600 characters)"
+        type: string
+        default: ""
+      en:
+        description: "English text (customer words, <= 600 characters)"
+        type: string
+        default: ""
+      drill:
+        description: "Drill: labelled test incident, a repair note, an AI text, a planted bad text that must be refused; emails off; deleted"
+        type: boolean
+        default: false
+  repository_dispatch:
+    types: [status-update]
+permissions:
+  contents: read
+concurrency:
+  group: status-update
+  cancel-in-progress: false
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: master
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Rules and guard (offline tests)
+        run: node --test test/*.test.mjs
+      - name: Post the update (or refuse it)
+        env:
+          STATUSPAGE_API_KEY: ${{ secrets.STATUSPAGE_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+          SLUG: ${{ inputs.slug || github.event.client_payload.slug }}
+          STAGE: ${{ inputs.stage || github.event.client_payload.stage }}
+          TEXT_DE: ${{ inputs.de || github.event.client_payload.de }}
+          TEXT_EN: ${{ inputs.en || github.event.client_payload.en }}
+          DRILL: ${{ inputs.drill && '--drill' || '' }}
+        run: node scripts/post-update.mjs $DRILL

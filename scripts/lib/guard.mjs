@@ -52,10 +52,10 @@ export const compose = ({ de, en }) => `${de.trim()}\n\n${en.trim()}`
 
 // The service names as customers read them (German needs the article).
 export const SERVICES = {
-  website: { de: 'Die Website', deShort: 'Website', en: 'the website', enShort: 'Website' },
-  'client-portal': { de: 'Das Kundenportal', deShort: 'Kundenportal', en: 'the client portal', enShort: 'Client portal' },
+  website: { de: 'Die Website', deAcc: 'die Website', deShort: 'Website', en: 'the website', enShort: 'Website' },
+  'client-portal': { de: 'Das Kundenportal', deAcc: 'das Kundenportal', deShort: 'Kundenportal', en: 'the client portal', enShort: 'Client portal' },
 }
-const svc = (slug) => SERVICES[slug] || { de: `Der Dienst ${slug}`, deShort: slug, en: `the ${slug} service`, enShort: slug }
+const svc = (slug) => SERVICES[slug] || { de: `Der Dienst ${slug}`, deAcc: `den Dienst ${slug}`, deShort: slug, en: `the ${slug} service`, enShort: slug }
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
 
 /** The fixed texts. Each is tested against guard() in test/incident-sync.test.mjs. */
@@ -73,6 +73,11 @@ export const TEMPLATES = {
   still(slug) {
     const s = svc(slug)
     return { de: `Wir arbeiten weiter an der Störung. ${s.de} ist noch nicht wieder wie gewohnt verfügbar. Wir melden uns, sobald wir mehr wissen.`, en: `We are still working on this. ${cap(s.en)} is not yet available as usual. We will post an update as soon as we know more.` }
+  },
+  // posted when one of our automatic repairs acts (layer B), e.g. a redeploy
+  healing(slug) {
+    const s = svc(slug)
+    return { de: `Wir haben die Ursache eingegrenzt und stellen ${s.deAcc} neu bereit.`, en: `We have narrowed down the cause and are redeploying ${s.en}.` }
   },
   monitoring(slug) {
     const s = svc(slug)

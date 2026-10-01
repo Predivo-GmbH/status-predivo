@@ -87,6 +87,7 @@ test('every fixed text passes the guard, for every service, in the state it is p
   for (const slug of Object.keys(SERVICES)) {
     for (const kind of ['down', 'degraded']) assert.deepEqual(guard(TEMPLATES.investigating(slug, kind)).reasons, [], `${slug} investigating ${kind}`)
     assert.deepEqual(guard(TEMPLATES.still(slug)).reasons, [], `${slug} still`)
+    assert.deepEqual(guard(TEMPLATES.healing(slug)).reasons, [], `${slug} healing`)
     assert.deepEqual(guard(TEMPLATES.monitoring(slug), { probeUp: true }).reasons, [], `${slug} monitoring`)
     assert.deepEqual(guard(TEMPLATES.resolved(slug), { probeUp: true }).reasons, [], `${slug} resolved`)
   }
