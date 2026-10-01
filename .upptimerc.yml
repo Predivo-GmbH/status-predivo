@@ -5,18 +5,13 @@ repo: status-predivo
 user-agent: Predivo-GmbH
 
 sites:
-  - name: Website (Deutsch)
+  # ONE website (Roger 2026-10-01): the German and English pages are the same site and fail together.
+  - name: Website
     url: https://predivo.ch/de
-    slug: website-de
+    slug: website
     icon: https://predivo.ch/favicon-32x32.png
     maxResponseTime: 10000
     # a 200 from a host error or parking page is not our site
-    __dangerous__body_down_if_text_missing: "Predivo"
-  - name: Website (English)
-    url: https://predivo.ch/en
-    slug: website-en
-    icon: https://predivo.ch/favicon-32x32.png
-    maxResponseTime: 10000
     __dangerous__body_down_if_text_missing: "Predivo"
   - name: Client portal
     url: https://portal.predivo.ch
