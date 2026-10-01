@@ -4,13 +4,6 @@
   "components": {
     "website-de": "l1hbmt8jhkwv",
     "website-en": "6trz0320s2jb",
-    "client-portal": "fg72ngq4b2yq",
-    "replyflow-app": "mz8kqlm0zfft",
-    "replyflow-signin": "2qngvjmtgf54",
-    "signalscore-app": "zxx9yjc6jxbx",
-    "signalscore-signin": "vpfc627h8mfj",
-    "signalscore-api": "qvwbg8w5k49y",
-    "channelmover-app": "8jtm40td65xw",
-    "channelmover-signin": "996sp135f16c"
+    "client-portal": "fg72ngq4b2yq"
   }
 }
