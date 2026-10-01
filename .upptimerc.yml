@@ -18,6 +18,66 @@ sites:
     icon: https://predivo.ch/favicon-32x32.png
     maxResponseTime: 10000
     __dangerous__body_down_if_text_missing: "Predivo"
+  - name: Client portal
+    url: https://portal.predivo.ch
+    slug: client-portal
+    icon: https://predivo.ch/favicon-32x32.png
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "Project Portal"
+
+  # LIVE PRODUCTS ONLY (fleet_portfolio, Roger 2026-09-14): ReplyFlow, SignalScore, ChannelMover.
+  # Parked products (ScoutCopilot, Valrano, arivioo) and internal tools are deliberately not here.
+  # "sign-in" = the product's Supabase auth service, asked with the product's PUBLIC anon key (the key
+  # every visitor's browser already receives), kept as a repo secret so it is not copied into this file.
+  - name: ReplyFlow website & app
+    url: https://replyflow.help
+    slug: replyflow-app
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "ReplyFlow"
+  - name: ReplyFlow sign-in & accounts
+    url: https://dqmhsdzldkxngwjrxois.supabase.co/auth/v1/health
+    slug: replyflow-signin
+    headers:
+      - "apikey: $REPLYFLOW_SUPABASE_ANON"
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "GoTrue"
+  - name: SignalScore website & app
+    url: https://signalscore.ch
+    slug: signalscore-app
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "SignalScore"
+  - name: SignalScore sign-in & accounts
+    url: https://ogdpgufptemcgyszmjek.supabase.co/auth/v1/health
+    slug: signalscore-signin
+    headers:
+      - "apikey: $SIGNALSCORE_SUPABASE_ANON"
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "GoTrue"
+  # The API is asked with a made-up customer key: its OWN refusal ("Missing or invalid API key")
+  # proves the API code runs. The gateway's refusal (no project key) would only prove Supabase is up.
+  - name: SignalScore API
+    url: https://ogdpgufptemcgyszmjek.supabase.co/functions/v1/api-v1
+    slug: signalscore-api
+    headers:
+      - "apikey: $SIGNALSCORE_SUPABASE_ANON"
+      - "Authorization: Bearer $SIGNALSCORE_SUPABASE_ANON"
+      - "x-api-key: status-probe-not-a-key"
+    expectedStatusCodes:
+      - 401
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "invalid API key"
+  - name: ChannelMover website & app
+    url: https://channelmover.com
+    slug: channelmover-app
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "ChannelMover"
+  - name: ChannelMover sign-in & accounts
+    url: https://qswluvqunswggfmesdcs.supabase.co/auth/v1/health
+    slug: channelmover-signin
+    headers:
+      - "apikey: $CHANNELMOVER_SUPABASE_ANON"
+    maxResponseTime: 10000
+    __dangerous__body_down_if_text_missing: "GoTrue"
 
 # the repo-scoped workflow token cannot edit repository metadata; description + homepage were set once through the API
 skipDescriptionUpdate: true
@@ -35,7 +95,7 @@ status-website:
   faviconSvg: https://predivo.ch/favicon.svg
   theme: light
   introTitle: "**Status der Predivo-Dienste**"
-  introMessage: "Hier sehen Sie live, ob predivo.ch erreichbar ist. Geprüft wird etwa alle fünf Minuten, von ausserhalb unserer eigenen Server. Störungen und geplante Wartungen erscheinen hier automatisch."
+  introMessage: "Hier sehen Sie live, ob predivo.ch, das Kundenportal und unsere Produkte ReplyFlow, SignalScore und ChannelMover erreichbar sind. Geprüft wird etwa alle fünf Minuten, von ausserhalb unserer eigenen Server. Störungen und geplante Wartungen erscheinen hier automatisch."
   navbar:
     - title: Status
       href: /
