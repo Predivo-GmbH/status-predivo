@@ -64,18 +64,20 @@
     "url": "https://xoecpzfsskalvjrtcbbl.supabase.co/auth/v1/health",
     "icon": "https://icons.duckduckgo.com/ip3/xoecpzfsskalvjrtcbbl.supabase.co.ico",
     "slug": "client-portal-signin",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
-    "uptimeDay": "100.00%",
+    "uptimeDay": "99.99%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 667,
-    "timeDay": 525,
-    "timeWeek": 664,
-    "timeMonth": 667,
-    "timeYear": 667,
-    "dailyMinutesDown": {}
+    "time": 823,
+    "timeDay": 1996,
+    "timeWeek": 1014,
+    "timeMonth": 823,
+    "timeYear": 823,
+    "dailyMinutesDown": {
+      "2026-10-17": 0
+    }
   },
   {
     "name": "Email",
