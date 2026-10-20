@@ -7,12 +7,12 @@
 
 export const MAX_CHARS = 600
 
-const SECRET_SHAPES = [
+export const SECRET_SHAPES = [
   /eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}/, // a JWT
   /\b(sb_(publishable|secret)_|sk_(live|test)_|pk_(live|test)_|rk_(live|test)_|ghp_|gho_|ghs_|github_pat_|xox[bpa]-)/i,
   /[A-Za-z0-9+/_-]{32,}/, // any long token-like run
 ]
-const IP = /\b(?:\d{1,3}\.){3}\d{1,3}\b/
+export const IP = /\b(?:\d{1,3}\.){3}\d{1,3}\b/
 // names customers do not know and must not be shown: our tools, hosts, files and jobs
 const INTERNAL = /\b(cockpit|backoffice|staging|tertia|sui-inter|upptime|workflow|runner|board|signal-intake|deploy job|cron)\b|\.(mjs|js|ts|yml|yaml|php|json|env)\b/i
 // a supplier named as the cause needs evidence on the board row; the text alone cannot carry it
