@@ -1,35 +1,35 @@
 {
   "website": {
     "down": 0,
-    "up": 336,
+    "up": 337,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "client-portal": {
     "down": 0,
-    "up": 1061,
+    "up": 1062,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "contact-form": {
     "down": 0,
-    "up": 1061,
+    "up": 1062,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "client-portal-signin": {
     "down": 0,
-    "up": 2384,
+    "up": 2385,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "email": {
     "down": 0,
-    "up": 1061,
+    "up": 1062,
     "component": "operational",
     "incident": null,
     "lastResolved": null
