@@ -5,11 +5,11 @@
     "icon": "https://predivo.ch/favicon-32x32.png",
     "slug": "website",
     "status": "down",
-    "uptime": "99.76%",
-    "uptimeDay": "99.03%",
-    "uptimeWeek": "99.72%",
-    "uptimeMonth": "99.72%",
-    "uptimeYear": "99.76%",
+    "uptime": "99.75%",
+    "uptimeDay": "98.57%",
+    "uptimeWeek": "99.65%",
+    "uptimeMonth": "99.70%",
+    "uptimeYear": "99.75%",
     "time": 976,
     "timeDay": 0,
     "timeWeek": 1380,
@@ -23,7 +23,7 @@
       "2026-11-01": 7,
       "2026-11-03": 28,
       "2026-11-05": 14,
-      "2026-11-10": 14
+      "2026-11-10": 21
     }
   },
   {
@@ -31,17 +31,17 @@
     "url": "https://portal.predivo.ch",
     "icon": "https://predivo.ch/favicon-32x32.png",
     "slug": "client-portal",
-    "status": "down",
-    "uptime": "99.85%",
-    "uptimeDay": "99.37%",
-    "uptimeWeek": "99.82%",
-    "uptimeMonth": "99.82%",
-    "uptimeYear": "99.85%",
-    "time": 521,
-    "timeDay": 0,
-    "timeWeek": 514,
-    "timeMonth": 537,
-    "timeYear": 521,
+    "status": "up",
+    "uptime": "99.84%",
+    "uptimeDay": "98.93%",
+    "uptimeWeek": "99.75%",
+    "uptimeMonth": "99.81%",
+    "uptimeYear": "99.84%",
+    "time": 519,
+    "timeDay": 398,
+    "timeWeek": 500,
+    "timeMonth": 534,
+    "timeYear": 519,
     "dailyMinutesDown": {
       "2026-10-02": 9,
       "2026-10-18": 18,
@@ -49,7 +49,7 @@
       "2026-10-27": 9,
       "2026-11-03": 19,
       "2026-11-05": 10,
-      "2026-11-10": 9
+      "2026-11-10": 15
     }
   },
   {
@@ -57,17 +57,17 @@
     "url": "https://predivo.ch/api/contact.php",
     "icon": "https://icons.duckduckgo.com/ip3/predivo.ch.ico",
     "slug": "contact-form",
-    "status": "down",
-    "uptime": "99.92%",
-    "uptimeDay": "99.71%",
-    "uptimeWeek": "99.91%",
-    "uptimeMonth": "99.91%",
-    "uptimeYear": "99.92%",
-    "time": 464,
-    "timeDay": 0,
-    "timeWeek": 447,
-    "timeMonth": 456,
-    "timeYear": 464,
+    "status": "up",
+    "uptime": "99.91%",
+    "uptimeDay": "99.26%",
+    "uptimeWeek": "99.85%",
+    "uptimeMonth": "99.89%",
+    "uptimeYear": "99.91%",
+    "time": 463,
+    "timeDay": 399,
+    "timeWeek": 441,
+    "timeMonth": 454,
+    "timeYear": 463,
     "dailyMinutesDown": {
       "2026-10-02": 5,
       "2026-10-18": 10,
@@ -75,7 +75,7 @@
       "2026-10-27": 5,
       "2026-11-03": 10,
       "2026-11-05": 5,
-      "2026-11-10": 4
+      "2026-11-10": 11
     }
   },
   {
@@ -103,12 +103,12 @@
     "url": "mail.predivo.ch",
     "icon": "https://icons.duckduckgo.com/ip3/null.ico",
     "slug": "email",
-    "status": "down",
-    "uptime": "99.99%",
-    "uptimeDay": "100.00%",
-    "uptimeWeek": "99.99%",
-    "uptimeMonth": "99.98%",
-    "uptimeYear": "99.99%",
+    "status": "up",
+    "uptime": "99.97%",
+    "uptimeDay": "99.55%",
+    "uptimeWeek": "99.93%",
+    "uptimeMonth": "99.97%",
+    "uptimeYear": "99.97%",
     "time": 131,
     "timeDay": 0,
     "timeWeek": 142,
@@ -120,7 +120,8 @@
       "2026-10-25": 4,
       "2026-10-27": 1,
       "2026-11-03": 2,
-      "2026-11-05": 1
+      "2026-11-05": 1,
+      "2026-11-10": 7
     }
   }
 ]
