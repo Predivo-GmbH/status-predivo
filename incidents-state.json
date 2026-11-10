@@ -1,35 +1,40 @@
 {
   "website": {
-    "down": 1,
+    "down": 2,
     "up": 0,
-    "component": "operational",
-    "incident": null,
+    "component": "major_outage",
+    "incident": {
+      "id": "2wd113571flc",
+      "status": "investigating",
+      "kind": "down",
+      "lastPostAt": "2026-11-10T23:15:42.450Z"
+    },
     "lastResolved": null
   },
   "client-portal": {
-    "down": 1,
-    "up": 0,
+    "down": 0,
+    "up": 1,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "contact-form": {
-    "down": 1,
-    "up": 0,
+    "down": 0,
+    "up": 1,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "client-portal-signin": {
     "down": 0,
-    "up": 3891,
+    "up": 3892,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "email": {
-    "down": 1,
-    "up": 0,
+    "down": 0,
+    "up": 1,
     "component": "operational",
     "incident": null,
     "lastResolved": null
