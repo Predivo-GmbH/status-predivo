@@ -46,10 +46,29 @@ export function textFor(stage, slug, de, en, verdict) {
   return v.ok ? { body: compose(t) } : { error: `the guard refused this text: ${v.reasons.join('; ')}` }
 }
 
-async function post(id, stage, body) {
+/**
+ * Pure: the Statuspage requests one post makes.
+ *
+ * THE REVIEW IS A POSTMORTEM, NOT AN UPDATE (2026-11-11). Statuspage refuses any new update on an
+ * incident that is already resolved: the first real review (incident 2wd113571flc, run 42999335161)
+ * failed with HTTP 422 "Incident cannot be updated once set to resolved". Its place for a look back on
+ * a closed incident is the incident's postmortem: write the draft, then publish it. Subscribers are
+ * not notified, the same rule as every other post from this door.
+ */
+export function requestsFor(stage, id, body) {
+  if (stage === 'review') {
+    return [
+      ['PUT', `/incidents/${id}/postmortem`, { postmortem: { body_draft: body } }],
+      ['PUT', `/incidents/${id}/postmortem/publish`, { postmortem: { notify_subscribers: false, notify_twitter: false } }],
+    ]
+  }
   const patch = { body, deliver_notifications: false }
   if (STAGES[stage].status) patch.status = STAGES[stage].status
-  await sp('PATCH', `/incidents/${id}`, { incident: patch })
+  return [['PATCH', `/incidents/${id}`, { incident: patch }]]
+}
+
+async function post(id, stage, body) {
+  for (const [method, path, payload] of requestsFor(stage, id, body)) await sp(method, path, payload)
 }
 
 async function main() {
@@ -91,6 +110,11 @@ async function drill() {
     await sp('PATCH', `/incidents/${id}`, { incident: { status: 'resolved', body: compose(TEMPLATES.resolved('website')), deliver_notifications: false } })
     const done = await sp('GET', `/incidents/${id}`)
     console.log(`DRILL incident ${id}: ${done.status}; updates: ${(done.incident_updates || []).map((u) => u.status).reverse().join(' > ')}`)
+    // The review of a closed incident goes in as its postmortem (Statuspage refuses updates once resolved).
+    const review = textFor('review', 'website', 'Ein fehlerhaftes Update war die Ursache. Neue Versionen werden jetzt vorher automatisch geprüft.', 'A faulty update was the cause. New versions are now checked automatically before release.', 'up')
+    if (review.error) throw new Error(`drill review: ${review.error}`)
+    await post(id, 'review', review.body)
+    console.log('DRILL review: published as the postmortem')
   } finally {
     await sp('DELETE', `/incidents/${id}`)
     console.log(`DRILL incident ${id} deleted`)
