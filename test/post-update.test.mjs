@@ -1,7 +1,7 @@
 // The one door for AI-written and repair updates (layers B and C), offline. Run: node --test test/*.test.mjs
 import { test } from 'node:test'
 import assert from 'node:assert'
-import { target, textFor } from '../scripts/post-update.mjs'
+import { target, textFor, requestsFor } from '../scripts/post-update.mjs'
 
 const NOW = '2026-01-02T12:00:00.000Z'
 const open = { incident: { id: 'inc1', status: 'investigating' } }
@@ -34,6 +34,20 @@ test('a sound AI text passes; the review is labelled as one', () => {
   assert.ok(textFor('identified', 'website', 'Ein fehlerhaftes Update hat die Website unterbrochen. Wir stellen die vorherige Version wieder her.', 'A faulty update interrupted the website. We are restoring the previous version.', 'down').body)
   const r = textFor('review', 'website', 'Ein fehlerhaftes Update war die Ursache. Es ist behoben, und neue Versionen werden jetzt vorher automatisch geprüft.', 'A faulty update was the cause. It is fixed, and new versions are now checked automatically before release.', 'up')
   assert.ok(r.body.startsWith('Rückblick: ') && r.body.includes('Review: '), r.body)
+})
+test('a review is published as the postmortem of the closed incident, never as an update (Statuspage refuses those, HTTP 422)', () => {
+  const r = requestsFor('review', 'inc0', 'Rückblick: x\n\nReview: y')
+  assert.deepEqual(r.map(([m, p]) => `${m} ${p}`), ['PUT /incidents/inc0/postmortem', 'PUT /incidents/inc0/postmortem/publish'])
+  assert.equal(r[0][2].postmortem.body_draft, 'Rückblick: x\n\nReview: y')
+  assert.equal(r[1][2].postmortem.notify_subscribers, false, 'no email from this door')
+  assert.ok(!r.some(([m]) => m === 'PATCH'), 'a resolved incident is never patched')
+})
+test('an update on an open incident stays a PATCH with its status and no email', () => {
+  const [[m, p, b]] = requestsFor('identified', 'inc1', 'text')
+  assert.equal(`${m} ${p}`, 'PATCH /incidents/inc1')
+  assert.deepEqual(b, { incident: { body: 'text', deliver_notifications: false, status: 'identified' } })
+  const [[, , u]] = requestsFor('update', 'inc1', 'text')
+  assert.equal(u.incident.status, undefined, 'a plain update keeps the current status')
 })
 test('a bad AI text is refused and never posted', () => {
   const bad = textFor('update', 'website', 'Die Website ist wegen Metanet in 10 Minuten wieder da.', 'Fixed by redeploying deploy.yml.', 'down')
