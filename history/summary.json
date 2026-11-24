@@ -4,16 +4,16 @@
     "url": "https://predivo.ch/de",
     "icon": "https://predivo.ch/favicon-32x32.png",
     "slug": "website",
-    "status": "down",
+    "status": "up",
     "uptime": "99.74%",
-    "uptimeDay": "98.70%",
-    "uptimeWeek": "99.67%",
+    "uptimeDay": "98.55%",
+    "uptimeWeek": "99.65%",
     "uptimeMonth": "99.62%",
     "uptimeYear": "99.74%",
     "time": 1058,
-    "timeDay": 1254,
-    "timeWeek": 1490,
-    "timeMonth": 1244,
+    "timeDay": 1129,
+    "timeWeek": 1436,
+    "timeMonth": 1238,
     "timeYear": 1058,
     "dailyMinutesDown": {
       "2026-10-02": 14,
@@ -27,7 +27,7 @@
       "2026-11-11": 14,
       "2026-11-14": 14,
       "2026-11-22": 14,
-      "2026-11-24": 19
+      "2026-11-24": 21
     }
   },
   {
@@ -35,17 +35,17 @@
     "url": "https://portal.predivo.ch",
     "icon": "https://predivo.ch/favicon-32x32.png",
     "slug": "client-portal",
-    "status": "down",
+    "status": "up",
     "uptime": "99.82%",
-    "uptimeDay": "99.04%",
-    "uptimeWeek": "99.77%",
+    "uptimeDay": "98.89%",
+    "uptimeWeek": "99.75%",
     "uptimeMonth": "99.75%",
     "uptimeYear": "99.82%",
-    "time": 519,
-    "timeDay": 429,
-    "timeWeek": 590,
-    "timeMonth": 511,
-    "timeYear": 519,
+    "time": 518,
+    "timeDay": 416,
+    "timeWeek": 569,
+    "timeMonth": 508,
+    "timeYear": 518,
     "dailyMinutesDown": {
       "2026-10-02": 9,
       "2026-10-18": 18,
@@ -57,7 +57,7 @@
       "2026-11-11": 9,
       "2026-11-14": 10,
       "2026-11-22": 9,
-      "2026-11-24": 14
+      "2026-11-24": 16
     }
   },
   {
