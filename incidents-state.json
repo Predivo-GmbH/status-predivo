@@ -1,45 +1,41 @@
 {
   "website": {
     "down": 0,
-    "up": 2,
+    "up": 3,
     "component": "operational",
-    "incident": {
+    "incident": null,
+    "lastResolved": {
       "id": "3yk4q00gf727",
-      "status": "monitoring",
-      "kind": "down",
-      "lastPostAt": "2026-11-24T22:19:35.592Z"
-    },
-    "lastResolved": null
+      "at": "2026-11-24T22:26:10.703Z"
+    }
   },
   "client-portal": {
     "down": 0,
-    "up": 2,
+    "up": 3,
     "component": "operational",
-    "incident": {
+    "incident": null,
+    "lastResolved": {
       "id": "7vfh8dvxkkg8",
-      "status": "monitoring",
-      "kind": "down",
-      "lastPostAt": "2026-11-24T22:19:37.209Z"
-    },
-    "lastResolved": null
+      "at": "2026-11-24T22:26:10.703Z"
+    }
   },
   "contact-form": {
     "down": 0,
-    "up": 3,
+    "up": 4,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "client-portal-signin": {
     "down": 0,
-    "up": 6414,
+    "up": 6415,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "email": {
     "down": 0,
-    "up": 3,
+    "up": 4,
     "component": "operational",
     "incident": null,
     "lastResolved": null
