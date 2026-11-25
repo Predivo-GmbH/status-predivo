@@ -1,7 +1,7 @@
 {
   "website": {
     "down": 0,
-    "up": 61,
+    "up": 62,
     "component": "operational",
     "incident": null,
     "lastResolved": {
@@ -11,7 +11,7 @@
   },
   "client-portal": {
     "down": 0,
-    "up": 61,
+    "up": 62,
     "component": "operational",
     "incident": null,
     "lastResolved": {
@@ -21,21 +21,21 @@
   },
   "contact-form": {
     "down": 0,
-    "up": 62,
+    "up": 63,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "client-portal-signin": {
     "down": 0,
-    "up": 6473,
+    "up": 6474,
     "component": "operational",
     "incident": null,
     "lastResolved": null
   },
   "email": {
     "down": 0,
-    "up": 62,
+    "up": 63,
     "component": "operational",
     "incident": null,
     "lastResolved": null
